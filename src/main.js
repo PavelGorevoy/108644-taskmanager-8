@@ -345,6 +345,22 @@ ${texts[randomCount(texts.length)]}</textarea
     fragment.getElementById(`filter__${filter}`).checked = true;
   };
 
+  const resetCards = function () {
+    while (BOARD_TASKS.firstChild) {
+      BOARD_TASKS.removeChild(BOARD_TASKS.firstChild);
+    }
+    renderCards(CARD_TITLE_CLASSES);
+  };
+
+  const onFilterClick = () => resetCards();
+
+  const switchFilter = function () {
+    let filters = document.querySelectorAll(`.filter__label`);
+    for (let i = 0; i < filters.length; i++) {
+      filters[i].addEventListener(`click`, onFilterClick);
+    }
+  };
+
   const renderMainFilters = function (filters) {
     let template = document.createElement(`template`);
     let fragment = document.createDocumentFragment();
@@ -356,6 +372,7 @@ ${texts[randomCount(texts.length)]}</textarea
     });
     checkedFilter(fragment, FILTER_CHECKED);
     MAIN_FILTER.appendChild(fragment);
+    switchFilter();
   };
 
   const renderCards = function (titles) {
