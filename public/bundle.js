@@ -90,12 +90,429 @@
 /*!*********************!*\
   !*** ./src/main.js ***!
   \*********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n\n(function () {\n\n  const MAIN_FILTER = document.querySelector(`.main__filter`);\n  const BOARD_TASKS = document.querySelector(`.board__tasks`);\n  const MAX_FILTER_COUNT = 99;\n  const MIN_CARD_COUNT = 5;\n  const FILTER_TITLES = [\n    `all`,\n    `overdue`,\n    `today`,\n    `favorites`,\n    `repeating`,\n    `tags`,\n    `archive`\n  ];\n  const CARD_TITLE_CLASSES = [\n    `black`,\n    `pink`,\n    `yellow`,\n    `blue`\n  ];\n  const CARD_OPTION_CLASSES = [\n    `card--repeat`,\n    `card--deadline`\n  ];\n  const CARD_TEXTS = [\n    `It is example of repeating task. It marks by wave.`,\n    `This is card with missing deadline`,\n    `This is example of new task, you can add picture, set date and time, add tags.`,\n    `Here is a card with filled data`,\n    ``\n  ];\n  const FILTER_CHECKED = FILTER_TITLES[0];\n\n  const randomCount = (max) => Math.floor(Math.random() * max);\n\n  const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;\n\n  const renderFilter = (filter) => `<input\n      type=\"radio\"\n      id=\"filter__${filter}\"\n      class=\"filter__input visually-hidden\"\n      name=\"filter\"\n    />\n    <label for=\"filter__${filter}\" class=\"filter__label\">\n     ${filter} <span class=\"filter__${filter}-count\">${randomCount(MAX_FILTER_COUNT)}</span></label\n    >`;\n\n  const renderCard = (names, options, texts) => `<article class=\"card card--${names} ${checkCardClass(options[0])} ${checkCardClass(options[1])}\">\n            <form class=\"card__form\" method=\"get\">\n              <div class=\"card__inner\">\n                <div class=\"card__control\">\n                  <button type=\"button\" class=\"card__btn card__btn--edit\">\n                    edit\n                  </button>\n                  <button type=\"button\" class=\"card__btn card__btn--archive\">\n                    archive\n                  </button>\n                  <button\n                    type=\"button\"\n                    class=\"card__btn card__btn--favorites card__btn--disabled\"\n                  >\n                    favorites\n                  </button>\n                </div>\n\n                <div class=\"card__color-bar\">\n                  <svg class=\"card__color-bar-wave\" width=\"100%\" height=\"10\">\n                    <use xlink:href=\"#wave\"></use>\n                  </svg>\n                </div>\n\n                <div class=\"card__textarea-wrap\">\n                  <label>\n                    <textarea\n                      class=\"card__text\"\n                      placeholder=\"Start typing your text here...\"\n                      name=\"text\"\n                    >\n${texts[randomCount(texts.length)]}</textarea\n                    >\n                  </label>\n                </div>\n\n                <div class=\"card__settings\">\n                  <div class=\"card__details\">\n                    <div class=\"card__dates\">\n                      <button class=\"card__date-deadline-toggle\" type=\"button\">\n                        date: <span class=\"card__date-status\">no</span>\n                      </button>\n\n                      <fieldset class=\"card__date-deadline\" disabled>\n                        <label class=\"card__input-deadline-wrap\">\n                          <input\n                            class=\"card__date\"\n                            type=\"text\"\n                            placeholder=\"23 September\"\n                            name=\"date\"\n                          />\n                        </label>\n                        <label class=\"card__input-deadline-wrap\">\n                          <input\n                            class=\"card__time\"\n                            type=\"text\"\n                            placeholder=\"11:15 PM\"\n                            name=\"time\"\n                          />\n                        </label>\n                      </fieldset>\n\n                      <button class=\"card__repeat-toggle\" type=\"button\">\n                        repeat:<span class=\"card__repeat-status\">no</span>\n                      </button>\n\n                      <fieldset class=\"card__repeat-days\" disabled>\n                        <div class=\"card__repeat-days-inner\">\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-mo-2\"\n                            name=\"repeat\"\n                            value=\"mo\"\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-mo-2\"\n                            >mo</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-tu-2\"\n                            name=\"repeat\"\n                            value=\"tu\"\n                            checked\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-tu-2\"\n                            >tu</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-we-2\"\n                            name=\"repeat\"\n                            value=\"we\"\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-we-2\"\n                            >we</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-th-2\"\n                            name=\"repeat\"\n                            value=\"th\"\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-th-2\"\n                            >th</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-fr-2\"\n                            name=\"repeat\"\n                            value=\"fr\"\n                            checked\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-fr-2\"\n                            >fr</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            name=\"repeat\"\n                            value=\"sa\"\n                            id=\"repeat-sa-2\"\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-sa-2\"\n                            >sa</label\n                          >\n                          <input\n                            class=\"visually-hidden card__repeat-day-input\"\n                            type=\"checkbox\"\n                            id=\"repeat-su-2\"\n                            name=\"repeat\"\n                            value=\"su\"\n                            checked\n                          />\n                          <label class=\"card__repeat-day\" for=\"repeat-su-2\"\n                            >su</label\n                          >\n                        </div>\n                      </fieldset>\n                    </div>\n\n                    <div class=\"card__hashtag\">\n                      <div class=\"card__hashtag-list\">\n                        <span class=\"card__hashtag-inner\">\n                          <input\n                            type=\"hidden\"\n                            name=\"hashtag\"\n                            value=\"repeat\"\n                            class=\"card__hashtag-hidden-input\"\n                          />\n                          <button type=\"button\" class=\"card__hashtag-name\">\n                            #repeat\n                          </button>\n                          <button type=\"button\" class=\"card__hashtag-delete\">\n                            delete\n                          </button>\n                        </span>\n\n                        <span class=\"card__hashtag-inner\">\n                          <input\n                            type=\"hidden\"\n                            name=\"hashtag\"\n                            value=\"repeat\"\n                            class=\"card__hashtag-hidden-input\"\n                          />\n                          <button type=\"button\" class=\"card__hashtag-name\">\n                            #cinema\n                          </button>\n                          <button type=\"button\" class=\"card__hashtag-delete\">\n                            delete\n                          </button>\n                        </span>\n\n                        <span class=\"card__hashtag-inner\">\n                          <input\n                            type=\"hidden\"\n                            name=\"hashtag\"\n                            value=\"repeat\"\n                            class=\"card__hashtag-hidden-input\"\n                          />\n                          <button type=\"button\" class=\"card__hashtag-name\">\n                            #entertaiment\n                          </button>\n                          <button type=\"button\" class=\"card__hashtag-delete\">\n                            delete\n                          </button>\n                        </span>\n                      </div>\n\n                      <label>\n                        <input\n                          type=\"text\"\n                          class=\"card__hashtag-input\"\n                          name=\"hashtag-input\"\n                          placeholder=\"Type new hashtag here\"\n                        />\n                      </label>\n                    </div>\n                  </div>\n\n                  <label class=\"card__img-wrap card__img-wrap--empty\">\n                    <input\n                      type=\"file\"\n                      class=\"card__img-input visually-hidden\"\n                      name=\"img\"\n                    />\n                    <img\n                      src=\"img/add-photo.svg\"\n                      alt=\"task picture\"\n                      class=\"card__img\"\n                    />\n                  </label>\n\n                  <div class=\"card__colors-inner\">\n                    <h3 class=\"card__colors-title\">Color</h3>\n                    <div class=\"card__colors-wrap\">\n                      <input\n                        type=\"radio\"\n                        id=\"color-black-2\"\n                        class=\"card__color-input card__color-input--black visually-hidden\"\n                        name=\"color\"\n                        value=\"black\"\n                      />\n                      <label\n                        for=\"color-black-2\"\n                        class=\"card__color card__color--black\"\n                        >black</label\n                      >\n                      <input\n                        type=\"radio\"\n                        id=\"color-yellow-2\"\n                        class=\"card__color-input card__color-input--yellow visually-hidden\"\n                        name=\"color\"\n                        value=\"yellow\"\n                      />\n                      <label\n                        for=\"color-yellow-2\"\n                        class=\"card__color card__color--yellow\"\n                        >yellow</label\n                      >\n                      <input\n                        type=\"radio\"\n                        id=\"color-blue-2\"\n                        class=\"card__color-input card__color-input--blue visually-hidden\"\n                        name=\"color\"\n                        value=\"blue\"\n                      />\n                      <label\n                        for=\"color-blue-2\"\n                        class=\"card__color card__color--blue\"\n                        >blue</label\n                      >\n                      <input\n                        type=\"radio\"\n                        id=\"color-green-2\"\n                        class=\"card__color-input card__color-input--green visually-hidden\"\n                        name=\"color\"\n                        value=\"green\"\n                      />\n                      <label\n                        for=\"color-green-2\"\n                        class=\"card__color card__color--green\"\n                        >green</label\n                      >\n                      <input\n                        type=\"radio\"\n                        id=\"color-pink-2\"\n                        class=\"card__color-input card__color-input--pink visually-hidden\"\n                        name=\"color\"\n                        value=\"pink\"\n                        checked\n                      />\n                      <label\n                        for=\"color-pink-2\"\n                        class=\"card__color card__color--pink\"\n                        >pink</label\n                      >\n                    </div>\n                  </div>\n                </div>\n\n                <div class=\"card__status-btns\">\n                  <button class=\"card__save\" type=\"submit\">save</button>\n                  <button class=\"card__delete\" type=\"button\">delete</button>\n                </div>\n              </div>\n            </form>\n          </article>`;\n\n  const checkedFilter = function (fragment, filter) {\n    fragment.getElementById(`filter__${filter}`).checked = true;\n  };\n\n  const resetCards = function () {\n    while (BOARD_TASKS.firstChild) {\n      BOARD_TASKS.removeChild(BOARD_TASKS.firstChild);\n    }\n    renderCards(CARD_TITLE_CLASSES);\n  };\n\n  const onFilterClick = () => resetCards();\n\n  const switchFilter = function () {\n    let filters = document.querySelectorAll(`.filter__label`);\n    for (let i = 0; i < filters.length; i++) {\n      filters[i].addEventListener(`click`, onFilterClick);\n    }\n  };\n\n  const renderMainFilters = function (filters) {\n    let template = document.createElement(`template`);\n    let fragment = document.createDocumentFragment();\n    filters.forEach(function (item) {\n      template.insertAdjacentHTML(`beforeend`, renderFilter(item));\n      for (let j = 0; j < template.children.length;) {\n        fragment.appendChild(template.children[j]);\n      }\n    });\n    checkedFilter(fragment, FILTER_CHECKED);\n    MAIN_FILTER.appendChild(fragment);\n    switchFilter();\n  };\n\n  const renderCards = function (titles) {\n    let template = document.createElement(`template`);\n    let fragment = document.createDocumentFragment();\n    let countCards = MIN_CARD_COUNT + randomCount(7);\n    for (let i = 0; i < countCards; i++) {\n      template.insertAdjacentHTML(`beforeend`, renderCard(titles[randomCount(titles.length)], CARD_OPTION_CLASSES, CARD_TEXTS));\n      for (let j = 0; j < template.children.length;) {\n        fragment.appendChild(template.children[j]);\n      }\n    }\n    BOARD_TASKS.appendChild(fragment);\n  };\n\n  renderMainFilters(FILTER_TITLES);\n  renderCards(CARD_TITLE_CLASSES);\n\n})();\n\n\n//# sourceURL=webpack:///./src/main.js?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _make_filter_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./make-filter.js */ "./src/make-filter.js");
+/* harmony import */ var _make_task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./make-task.js */ "./src/make-task.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
+
+
+
+const MAIN_FILTER = document.querySelector(`.main__filter`);
+const BOARD_TASKS = document.querySelector(`.board__tasks`);
+const MIN_CARD_COUNT = 5;
+const FILTER_TITLES = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
+const CARD_TITLE_CLASSES = [`black`, `pink`, `yellow`, `blue`];
+const CARD_OPTION_CLASSES = [`card--repeat`, `card--deadline`];
+const CARD_TEXTS = [`It is example of repeating task. It marks by wave.`, `This is card with missing deadline`, `This is example of new task, you can add picture, set date and time, add tags.`, `Here is a card with filled data`, ``];
+const FILTER_CHECKED = FILTER_TITLES[0];
+
+const checkedFilter = function (fragment, filter) {
+  fragment.getElementById(`filter__${filter}`).checked = true;
+};
+
+const resetCards = function () {
+  while (BOARD_TASKS.firstChild) {
+    BOARD_TASKS.removeChild(BOARD_TASKS.firstChild);
+  }
+
+  renderCards(CARD_TITLE_CLASSES);
+};
+
+const onFilterClick = () => resetCards();
+
+const switchFilter = function () {
+  let filters = document.querySelectorAll(`.filter__label`);
+
+  for (let i = 0; i < filters.length; i++) {
+    filters[i].addEventListener(`click`, onFilterClick);
+  }
+};
+
+const renderMainFilters = function (filters) {
+  let template = document.createElement(`template`);
+  let fragment = document.createDocumentFragment();
+  filters.forEach(function (item) {
+    template.insertAdjacentHTML(`beforeend`, Object(_make_filter_js__WEBPACK_IMPORTED_MODULE_0__["default"])(item));
+
+    for (let j = 0; j < template.children.length;) {
+      fragment.appendChild(template.children[j]);
+    }
+  });
+  checkedFilter(fragment, FILTER_CHECKED);
+  MAIN_FILTER.appendChild(fragment);
+  switchFilter();
+};
+
+const renderCards = function (titles) {
+  let template = document.createElement(`template`);
+  let fragment = document.createDocumentFragment();
+  let countCards = MIN_CARD_COUNT + Object(_util_js__WEBPACK_IMPORTED_MODULE_2__["default"])(7);
+
+  for (let i = 0; i < countCards; i++) {
+    template.insertAdjacentHTML(`beforeend`, Object(_make_task_js__WEBPACK_IMPORTED_MODULE_1__["default"])(titles[Object(_util_js__WEBPACK_IMPORTED_MODULE_2__["default"])(titles.length)], CARD_OPTION_CLASSES, CARD_TEXTS));
+
+    for (let j = 0; j < template.children.length;) {
+      fragment.appendChild(template.children[j]);
+    }
+  }
+
+  BOARD_TASKS.appendChild(fragment);
+};
+
+renderMainFilters(FILTER_TITLES);
+renderCards(CARD_TITLE_CLASSES);
+
+/***/ }),
+
+/***/ "./src/make-filter.js":
+/*!****************************!*\
+  !*** ./src/make-filter.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
+
+const MAX_FILTER_COUNT = 99;
+/* harmony default export */ __webpack_exports__["default"] = (filter => `<input
+    type="radio"
+    id="filter__${filter}"
+    class="filter__input visually-hidden"
+    name="filter"
+  />
+  <label for="filter__${filter}" class="filter__label">
+   ${filter} <span class="filter__${filter}-count">${Object(_util_js__WEBPACK_IMPORTED_MODULE_0__["default"])(MAX_FILTER_COUNT)}</span></label
+  >`);
+
+/***/ }),
+
+/***/ "./src/make-task.js":
+/*!**************************!*\
+  !*** ./src/make-task.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util.js */ "./src/util.js");
+
+
+const checkCardClass = option => Object(_util_js__WEBPACK_IMPORTED_MODULE_0__["default"])(5) > 3 ? `${option}` : ``;
+
+/* harmony default export */ __webpack_exports__["default"] = ((names, options, texts) => `<article class="card card--${names} ${checkCardClass(options[0])} ${checkCardClass(options[1])}">
+          <form class="card__form" method="get">
+            <div class="card__inner">
+              <div class="card__control">
+                <button type="button" class="card__btn card__btn--edit">
+                  edit
+                </button>
+                <button type="button" class="card__btn card__btn--archive">
+                  archive
+                </button>
+                <button
+                  type="button"
+                  class="card__btn card__btn--favorites card__btn--disabled"
+                >
+                  favorites
+                </button>
+              </div>
+
+              <div class="card__color-bar">
+                <svg class="card__color-bar-wave" width="100%" height="10">
+                  <use xlink:href="#wave"></use>
+                </svg>
+              </div>
+
+              <div class="card__textarea-wrap">
+                <label>
+                  <textarea
+                    class="card__text"
+                    placeholder="Start typing your text here..."
+                    name="text"
+                  >
+${texts[Object(_util_js__WEBPACK_IMPORTED_MODULE_0__["default"])(texts.length)]}</textarea
+                  >
+                </label>
+              </div>
+
+              <div class="card__settings">
+                <div class="card__details">
+                  <div class="card__dates">
+                    <button class="card__date-deadline-toggle" type="button">
+                      date: <span class="card__date-status">no</span>
+                    </button>
+
+                    <fieldset class="card__date-deadline" disabled>
+                      <label class="card__input-deadline-wrap">
+                        <input
+                          class="card__date"
+                          type="text"
+                          placeholder="23 September"
+                          name="date"
+                        />
+                      </label>
+                      <label class="card__input-deadline-wrap">
+                        <input
+                          class="card__time"
+                          type="text"
+                          placeholder="11:15 PM"
+                          name="time"
+                        />
+                      </label>
+                    </fieldset>
+
+                    <button class="card__repeat-toggle" type="button">
+                      repeat:<span class="card__repeat-status">no</span>
+                    </button>
+
+                    <fieldset class="card__repeat-days" disabled>
+                      <div class="card__repeat-days-inner">
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-mo-2"
+                          name="repeat"
+                          value="mo"
+                        />
+                        <label class="card__repeat-day" for="repeat-mo-2"
+                          >mo</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-tu-2"
+                          name="repeat"
+                          value="tu"
+                          checked
+                        />
+                        <label class="card__repeat-day" for="repeat-tu-2"
+                          >tu</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-we-2"
+                          name="repeat"
+                          value="we"
+                        />
+                        <label class="card__repeat-day" for="repeat-we-2"
+                          >we</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-th-2"
+                          name="repeat"
+                          value="th"
+                        />
+                        <label class="card__repeat-day" for="repeat-th-2"
+                          >th</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-fr-2"
+                          name="repeat"
+                          value="fr"
+                          checked
+                        />
+                        <label class="card__repeat-day" for="repeat-fr-2"
+                          >fr</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          name="repeat"
+                          value="sa"
+                          id="repeat-sa-2"
+                        />
+                        <label class="card__repeat-day" for="repeat-sa-2"
+                          >sa</label
+                        >
+                        <input
+                          class="visually-hidden card__repeat-day-input"
+                          type="checkbox"
+                          id="repeat-su-2"
+                          name="repeat"
+                          value="su"
+                          checked
+                        />
+                        <label class="card__repeat-day" for="repeat-su-2"
+                          >su</label
+                        >
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div class="card__hashtag">
+                    <div class="card__hashtag-list">
+                      <span class="card__hashtag-inner">
+                        <input
+                          type="hidden"
+                          name="hashtag"
+                          value="repeat"
+                          class="card__hashtag-hidden-input"
+                        />
+                        <button type="button" class="card__hashtag-name">
+                          #repeat
+                        </button>
+                        <button type="button" class="card__hashtag-delete">
+                          delete
+                        </button>
+                      </span>
+
+                      <span class="card__hashtag-inner">
+                        <input
+                          type="hidden"
+                          name="hashtag"
+                          value="repeat"
+                          class="card__hashtag-hidden-input"
+                        />
+                        <button type="button" class="card__hashtag-name">
+                          #cinema
+                        </button>
+                        <button type="button" class="card__hashtag-delete">
+                          delete
+                        </button>
+                      </span>
+
+                      <span class="card__hashtag-inner">
+                        <input
+                          type="hidden"
+                          name="hashtag"
+                          value="repeat"
+                          class="card__hashtag-hidden-input"
+                        />
+                        <button type="button" class="card__hashtag-name">
+                          #entertaiment
+                        </button>
+                        <button type="button" class="card__hashtag-delete">
+                          delete
+                        </button>
+                      </span>
+                    </div>
+
+                    <label>
+                      <input
+                        type="text"
+                        class="card__hashtag-input"
+                        name="hashtag-input"
+                        placeholder="Type new hashtag here"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <label class="card__img-wrap card__img-wrap--empty">
+                  <input
+                    type="file"
+                    class="card__img-input visually-hidden"
+                    name="img"
+                  />
+                  <img
+                    src="img/add-photo.svg"
+                    alt="task picture"
+                    class="card__img"
+                  />
+                </label>
+
+                <div class="card__colors-inner">
+                  <h3 class="card__colors-title">Color</h3>
+                  <div class="card__colors-wrap">
+                    <input
+                      type="radio"
+                      id="color-black-2"
+                      class="card__color-input card__color-input--black visually-hidden"
+                      name="color"
+                      value="black"
+                    />
+                    <label
+                      for="color-black-2"
+                      class="card__color card__color--black"
+                      >black</label
+                    >
+                    <input
+                      type="radio"
+                      id="color-yellow-2"
+                      class="card__color-input card__color-input--yellow visually-hidden"
+                      name="color"
+                      value="yellow"
+                    />
+                    <label
+                      for="color-yellow-2"
+                      class="card__color card__color--yellow"
+                      >yellow</label
+                    >
+                    <input
+                      type="radio"
+                      id="color-blue-2"
+                      class="card__color-input card__color-input--blue visually-hidden"
+                      name="color"
+                      value="blue"
+                    />
+                    <label
+                      for="color-blue-2"
+                      class="card__color card__color--blue"
+                      >blue</label
+                    >
+                    <input
+                      type="radio"
+                      id="color-green-2"
+                      class="card__color-input card__color-input--green visually-hidden"
+                      name="color"
+                      value="green"
+                    />
+                    <label
+                      for="color-green-2"
+                      class="card__color card__color--green"
+                      >green</label
+                    >
+                    <input
+                      type="radio"
+                      id="color-pink-2"
+                      class="card__color-input card__color-input--pink visually-hidden"
+                      name="color"
+                      value="pink"
+                      checked
+                    />
+                    <label
+                      for="color-pink-2"
+                      class="card__color card__color--pink"
+                      >pink</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="card__status-btns">
+                <button class="card__save" type="submit">save</button>
+                <button class="card__delete" type="button">delete</button>
+              </div>
+            </div>
+          </form>
+        </article>`);
+
+/***/ }),
+
+/***/ "./src/util.js":
+/*!*********************!*\
+  !*** ./src/util.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (max => Math.floor(Math.random() * max));
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=bundle.js.map

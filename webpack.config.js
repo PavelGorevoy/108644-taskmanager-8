@@ -7,13 +7,13 @@ module.exports = {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`)
   },
-  devtool: `source-map`,
   module: {
     rules: [{
       test: /\.js$/,
       use: `babel-loader`
     }]
   },
+  devtool: `source-map`,
   devServer: {
     contentBase: path.join(__dirname, `public`),
     publicPath: `http://localhost:8080/`,

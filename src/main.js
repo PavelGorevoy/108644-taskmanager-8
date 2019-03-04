@@ -1,9 +1,9 @@
 import makeFilter from './make-filter.js';
 import makeTask from './make-task.js';
+import randomCount from './util.js';
 
 const MAIN_FILTER = document.querySelector(`.main__filter`);
 const BOARD_TASKS = document.querySelector(`.board__tasks`);
-const MAX_FILTER_COUNT = 99;
 const MIN_CARD_COUNT = 5;
 const FILTER_TITLES = [
   `all`,
@@ -33,10 +33,6 @@ const CARD_TEXTS = [
 ];
 const FILTER_CHECKED = FILTER_TITLES[0];
 
-const randomCount = (max) => Math.floor(Math.random() * max);
-
-const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;
-
 const checkedFilter = function (fragment, filter) {
   fragment.getElementById(`filter__${filter}`).checked = true;
 };
@@ -61,7 +57,7 @@ const renderMainFilters = function (filters) {
   let template = document.createElement(`template`);
   let fragment = document.createDocumentFragment();
   filters.forEach(function (item) {
-    template.insertAdjacentHTML(`beforeend`, renderFilter(item));
+    template.insertAdjacentHTML(`beforeend`, makeFilter(item));
     for (let j = 0; j < template.children.length;) {
       fragment.appendChild(template.children[j]);
     }
@@ -76,7 +72,7 @@ const renderCards = function (titles) {
   let fragment = document.createDocumentFragment();
   let countCards = MIN_CARD_COUNT + randomCount(7);
   for (let i = 0; i < countCards; i++) {
-    template.insertAdjacentHTML(`beforeend`, renderCard(titles[randomCount(titles.length)], CARD_OPTION_CLASSES, CARD_TEXTS));
+    template.insertAdjacentHTML(`beforeend`, makeTask(titles[randomCount(titles.length)], CARD_OPTION_CLASSES, CARD_TEXTS));
     for (let j = 0; j < template.children.length;) {
       fragment.appendChild(template.children[j]);
     }

@@ -1,3 +1,7 @@
+import randomCount from './util.js';
+
+const MAX_FILTER_COUNT = 99;
+
 export default (filter) => `<input
     type="radio"
     id="filter__${filter}"

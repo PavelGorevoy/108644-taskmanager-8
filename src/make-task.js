@@ -1,3 +1,7 @@
+import randomCount from './util.js';
+
+const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;
+
 export default (names, options, texts) => `<article class="card card--${names} ${checkCardClass(options[0])} ${checkCardClass(options[1])}">
           <form class="card__form" method="get">
             <div class="card__inner">
