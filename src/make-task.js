@@ -1,4 +1,4 @@
-import randomCount from './util.js';
+import {randomCount} from './util.js';
 
 const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;
 

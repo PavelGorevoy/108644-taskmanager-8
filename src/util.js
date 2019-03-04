@@ -1,1 +1,3 @@
-export default (max) => Math.floor(Math.random() * max);
+const randomCount = (max) => Math.floor(Math.random() * max);
+
+export {randomCount};

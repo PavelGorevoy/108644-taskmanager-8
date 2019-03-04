@@ -1,4 +1,4 @@
-import randomCount from './util.js';
+import {randomCount} from './util.js';
 
 const MAX_FILTER_COUNT = 99;
 
