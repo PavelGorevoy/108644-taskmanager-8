@@ -1,4 +1,6 @@
-export default (task) => `<article class="card card--${task.color} card--repeat card--deadline">
+import makeHashtags from './make-hashtags.js';
+
+export default (task) => `<article class="card card--${task.color} card--repeat ${task.dueDate < Date.now() ? `card--deadline` : ``}">
           <form class="card__form" method="get">
             <div class="card__inner">
               <div class="card__control">
@@ -145,50 +147,7 @@ ${task.title}</textarea
 
                   <div class="card__hashtag">
                     <div class="card__hashtag-list">
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #repeat
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
-
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #cinema
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
-
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #entertaiment
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
+                      ${makeHashtags(task.tags)}
                     </div>
 
                     <label>
@@ -202,7 +161,7 @@ ${task.title}</textarea
                   </div>
                 </div>
 
-                <label class="card__img-wrap card__img-wrap--empty">
+                <label class="card__img-wrap ${task.picture === `` ? `card__img-wrap--empty"` : ``}">
                   <input
                     type="file"
                     class="card__img-input visually-hidden"

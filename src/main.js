@@ -51,18 +51,19 @@ const renderMainFilters = function (filters) {
   switchFilter();
 };
 
-const renderCards = function (task) {
+const renderCards = function () {
   let template = document.createElement(`template`);
   let fragment = document.createDocumentFragment();
   let countCards = MIN_CARD_COUNT + randomCount(7);
   for (let i = 0; i < countCards; i++) {
-    template.insertAdjacentHTML(`beforeend`, makeTask(task));
+    template.insertAdjacentHTML(`beforeend`, makeTask(getTask()));
     for (let j = 0; j < template.children.length;) {
       fragment.appendChild(template.children[j]);
     }
   }
   BOARD_TASKS.appendChild(fragment);
 };
-
+console.log(getTask());
+console.log(Date.now());
 renderMainFilters(FILTER_TITLES);
-renderCards(getTask);
+renderCards();

@@ -1,23 +1,39 @@
 import {randomCount} from './util.js';
 
+const HASHTAGS = new Set([
+  `homework`,
+  `theory`,
+  `practice`,
+  `intensive`,
+  `keks`,
+  `hard`,
+  `work`,
+  `imagination`
+]);
+const hashTagsCount = 3;
+
+const getHashTags = (count) => {
+  let hashTags = Array.from(HASHTAGS);
+  let taskHashTags = new Set([]);
+  for (let i = 0; i <= count; i++) {
+    let delIndex = randomCount(hashTags.length);
+    taskHashTags.add(hashTags[delIndex]);
+    hashTags.splice(delIndex, 1);
+  }
+  return taskHashTags;
+};
+
+const getDate = () => Date.now() + (randomCount(14) - 7) * 24 * 60 * 60 * 1000;
+
 const getTask = () => ({
   title: [
     `Изучить теорию`,
     `Сделать домашку`,
     `Пройти интенсив на соточку`,
   ][randomCount(3)],
-  dueDate: Date.now() + 1 + randomCount(7) * 24 * 60 * 60 * 1000,
-  tags: new Set([
-    `homework`,
-    `theory`,
-    `practice`,
-    `intensive`,
-    `keks`,
-    `hard`,
-    `work`,
-    `imagination`
-  ]),
-  picture: `//picsum.photos/100/100?r=${Math.random()}`,
+  dueDate: getDate(),
+  tags: getHashTags(randomCount(hashTagsCount)),
+  picture: Math.random() >= 0.5 ? `//picsum.photos/100/100?r=${Math.random()}` : ``,
   color: [
     `black`,
     `yellow`,
@@ -25,7 +41,7 @@ const getTask = () => ({
     `green`,
     `pink`,
     `violet`
-  ],
+  ][randomCount(5)],
   repeatingDays: {
     'Mo': Math.random() >= 0.5,
     'Tu': Math.random() >= 0.5,
