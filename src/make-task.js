@@ -1,6 +1,27 @@
 import makeHashtags from './make-hashtags.js';
 
-export default (task) => `<article class="card card--${task.color} card--repeat ${task.dueDate < Date.now() ? `card--deadline` : ``}">
+const tadayRepeat = (daysRepeat) => {
+  const dayNow = (new Date()).getDay();
+  let flag = false;
+  if (dayNow === 0 && daysRepeat.su === true) {
+    flag = true;
+  } else if (dayNow === 1 && daysRepeat.mo === true) {
+    flag = true;
+  } else if (dayNow === 2 && daysRepeat.tu === true) {
+    flag = true;
+  } else if (dayNow === 3 && daysRepeat.we === true) {
+    flag = true;
+  } else if (dayNow === 4 && daysRepeat.th === true) {
+    flag = true;
+  } else if (dayNow === 5 && daysRepeat.fr === true) {
+    flag = true;
+  } else if (dayNow === 6 && daysRepeat.sa === true) {
+    flag = true;
+  }
+  return flag;
+};
+
+export default (task) => `<article class="card card--${task.color} ${tadayRepeat(task.repeatingDays) === true ? `card--repeat` : ``} ${task.dueDate < Date.now() ? `card--deadline` : ``}">
           <form class="card__form" method="get">
             <div class="card__inner">
               <div class="card__control">
