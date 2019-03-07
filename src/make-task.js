@@ -1,8 +1,4 @@
-import {randomCount} from './util.js';
-
-const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;
-
-export default (names, options, texts) => `<article class="card card--${names} ${checkCardClass(options[0])} ${checkCardClass(options[1])}">
+export default (task) => `<article class="card card--${task.color} card--repeat card--deadline">
           <form class="card__form" method="get">
             <div class="card__inner">
               <div class="card__control">
@@ -16,7 +12,7 @@ export default (names, options, texts) => `<article class="card card--${names} $
                   type="button"
                   class="card__btn card__btn--favorites card__btn--disabled"
                 >
-                  favorites
+                  ${task.isFavorite ? `favorite` : ``}
                 </button>
               </div>
 
@@ -33,7 +29,7 @@ export default (names, options, texts) => `<article class="card card--${names} $
                     placeholder="Start typing your text here..."
                     name="text"
                   >
-${texts[randomCount(texts.length)]}</textarea
+${task.title}</textarea
                   >
                 </label>
               </div>
@@ -213,7 +209,7 @@ ${texts[randomCount(texts.length)]}</textarea
                     name="img"
                   />
                   <img
-                    src="img/add-photo.svg"
+                    src="${task.picture}"
                     alt="task picture"
                     class="card__img"
                   />
