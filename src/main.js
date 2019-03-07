@@ -63,7 +63,6 @@ const renderCards = function () {
   }
   BOARD_TASKS.appendChild(fragment);
 };
-console.log(getTask());
-console.log(Date.now());
+
 renderMainFilters(FILTER_TITLES);
 renderCards();
