@@ -1,8 +1,27 @@
-import {randomCount} from './util.js';
+import makeHashtags from './make-hashtags.js';
 
-const checkCardClass = (option) => randomCount(5) > 3 ? `${option}` : ``;
+const tadayRepeat = (daysRepeat) => {
+  const dayNow = (new Date()).getDay();
+  let flag = false;
+  if (dayNow === 0 && daysRepeat.su === true) {
+    flag = true;
+  } else if (dayNow === 1 && daysRepeat.mo === true) {
+    flag = true;
+  } else if (dayNow === 2 && daysRepeat.tu === true) {
+    flag = true;
+  } else if (dayNow === 3 && daysRepeat.we === true) {
+    flag = true;
+  } else if (dayNow === 4 && daysRepeat.th === true) {
+    flag = true;
+  } else if (dayNow === 5 && daysRepeat.fr === true) {
+    flag = true;
+  } else if (dayNow === 6 && daysRepeat.sa === true) {
+    flag = true;
+  }
+  return flag;
+};
 
-export default (names, options, texts) => `<article class="card card--${names} ${checkCardClass(options[0])} ${checkCardClass(options[1])}">
+export default (task) => `<article class="card card--${task.color} ${tadayRepeat(task.repeatingDays) === true ? `card--repeat` : ``} ${task.dueDate < Date.now() ? `card--deadline` : ``}">
           <form class="card__form" method="get">
             <div class="card__inner">
               <div class="card__control">
@@ -16,7 +35,7 @@ export default (names, options, texts) => `<article class="card card--${names} $
                   type="button"
                   class="card__btn card__btn--favorites card__btn--disabled"
                 >
-                  favorites
+                  ${task.isFavorite ? `favorite` : ``}
                 </button>
               </div>
 
@@ -33,7 +52,7 @@ export default (names, options, texts) => `<article class="card card--${names} $
                     placeholder="Start typing your text here..."
                     name="text"
                   >
-${texts[randomCount(texts.length)]}</textarea
+${task.title}</textarea
                   >
                 </label>
               </div>
@@ -149,50 +168,7 @@ ${texts[randomCount(texts.length)]}</textarea
 
                   <div class="card__hashtag">
                     <div class="card__hashtag-list">
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #repeat
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
-
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #cinema
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
-
-                      <span class="card__hashtag-inner">
-                        <input
-                          type="hidden"
-                          name="hashtag"
-                          value="repeat"
-                          class="card__hashtag-hidden-input"
-                        />
-                        <button type="button" class="card__hashtag-name">
-                          #entertaiment
-                        </button>
-                        <button type="button" class="card__hashtag-delete">
-                          delete
-                        </button>
-                      </span>
+                      ${makeHashtags(task.tags)}
                     </div>
 
                     <label>
@@ -206,14 +182,14 @@ ${texts[randomCount(texts.length)]}</textarea
                   </div>
                 </div>
 
-                <label class="card__img-wrap card__img-wrap--empty">
+                <label class="card__img-wrap ${task.picture === `` ? `card__img-wrap--empty"` : ``}">
                   <input
                     type="file"
                     class="card__img-input visually-hidden"
                     name="img"
                   />
                   <img
-                    src="img/add-photo.svg"
+                    src="${task.picture}"
                     alt="task picture"
                     class="card__img"
                   />
