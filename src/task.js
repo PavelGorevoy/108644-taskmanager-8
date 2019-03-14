@@ -30,7 +30,7 @@ class Task {
 
   get template() {
     return `
-  <article class="card card--${this.color} ${this._isRepeated() ? `card--repeat` : ``} ${this.dueDate < Date.now() ? `card--deadline` : ``}">
+  <article class="card card--${this._color} ${this._isRepeated() ? `card--repeat` : ``} ${this._dueDate < Date.now() ? `card--deadline` : ``}">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -61,7 +61,7 @@ class Task {
                       placeholder="Start typing your text here..."
                       name="text"
                     >
-  ${this.title}</textarea
+  ${this._title}</textarea
                     >
                   </label>
                 </div>
@@ -196,14 +196,14 @@ class Task {
                     </div>
                   </div>
 
-                  <label class="card__img-wrap ${this.picture === `` ? `card__img-wrap--empty"` : ``}">
+                  <label class="card__img-wrap ${this._picture === `` ? `card__img-wrap--empty"` : ``}">
                     <input
                       type="file"
                       class="card__img-input visually-hidden"
                       name="img"
                     />
                     <img
-                      src="${this.picture}"
+                      src="${this._picture}"
                       alt="task picture"
                       class="card__img"
                     />
