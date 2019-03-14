@@ -21,7 +21,8 @@ class Task {
   }
 
   _onEditButtonClick() {
-
+    this._state.isEdit = !this._state.isEdit;
+    this.update();
   }
 
   bind() {
@@ -37,6 +38,21 @@ class Task {
     container.appendChild(this._element);
 
     this.bind();
+
+    return this._element;
+  }
+
+  unrender() {
+    this._element = null;
+    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick.bind(this));
+  }
+
+  update() {
+    if (this._state.isEdit) {
+      return this._element.classList.add(`card--edit`);
+    }
+    this._element.classList.remove(`card--edit`);
+    return this._element.classList();
   }
 
   get template() {

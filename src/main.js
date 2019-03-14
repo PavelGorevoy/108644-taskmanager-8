@@ -5,7 +5,7 @@ import {Task} from './task.js';
 
 const MAIN_FILTER = document.querySelector(`.main__filter`);
 const BOARD_TASKS = document.querySelector(`.board__tasks`);
-const MIN_CARD_COUNT = 5;
+const MIN_CARD_COUNT = 8;
 const FILTER_TITLES = [
   `all`,
   `overdue`,
@@ -54,7 +54,7 @@ const renderMainFilters = function (filters) {
 const renderCards = function () {
   let template = document.createElement(`template`);
   let fragment = document.createDocumentFragment();
-  let countCards = MIN_CARD_COUNT + randomCount(7);
+  let countCards = MIN_CARD_COUNT + randomCount(4);
   let cardTask = [];
   for (let i = 0; i < countCards; i++) {
     cardTask[i] = new Task(task());
