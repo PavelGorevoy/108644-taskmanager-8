@@ -1,8 +1,8 @@
 import makeFilter from './make-filter.js';
 import makeTask from './make-task.js';
 import {randomCount} from './util.js';
-import {getTask} from './data.js';
-import {task} from './task.js';
+import {task} from './data.js';
+import {Task} from './task.js';
 
 const MAIN_FILTER = document.querySelector(`.main__filter`);
 const BOARD_TASKS = document.querySelector(`.board__tasks`);
@@ -26,7 +26,7 @@ const resetCards = function () {
   while (BOARD_TASKS.firstChild) {
     BOARD_TASKS.removeChild(BOARD_TASKS.firstChild);
   }
-  renderCards(getTask);
+  renderCards(task);
 };
 
 const onFilterClick = () => resetCards();
@@ -57,7 +57,9 @@ const renderCards = function () {
   let fragment = document.createDocumentFragment();
   let countCards = MIN_CARD_COUNT + randomCount(7);
   for (let i = 0; i < countCards; i++) {
-    template.insertAdjacentHTML(`beforeend`, makeTask(getTask()));
+    //template.insertAdjacentHTML(`beforeend`, makeTask(task()));
+    let cardTask = new Task(task);
+    cardTask.render(template);
     for (let j = 0; j < template.children.length;) {
       fragment.appendChild(template.children[j]);
     }

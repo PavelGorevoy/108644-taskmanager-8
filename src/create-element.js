@@ -1,6 +1,6 @@
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
+  newElement.insertAdjacentHTML(`beforeend`, template);
   return newElement.firstChild;
 };
 

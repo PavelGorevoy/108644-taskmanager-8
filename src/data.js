@@ -25,7 +25,7 @@ const getHashTags = (count) => {
 
 const getDate = () => Date.now() + (randomCount(14) - 7) * 24 * 60 * 60 * 1000;
 
-const getTask = () => ({
+const task = {
   title: [
     `Изучить теорию`,
     `Сделать домашку`,
@@ -53,6 +53,6 @@ const getTask = () => ({
   },
   isFavorite: Math.random() >= 0.5,
   isDone: Math.random() >= 0.5
-});
+};
 
-export {getTask};
+export {task};

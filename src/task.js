@@ -2,9 +2,10 @@ import {createElement} from './create-element.js';
 
 class Task {
   constructor(data) {
+        debugger;
     this._title = data.title;
     this._color = data.color;
-    this._dueData = data.dueData;
+    this._dueData = data.dueDate;
     this._tags = data.tags;
     this._picture = data.picture;
     this._repeatingDays = data.repeatingDays;
@@ -12,7 +13,7 @@ class Task {
     this._element = null;
     this._state = {
       isEdit: false,
-      isFavorite: false
+      isFavorite: data.isFavorite
     };
   }
 
@@ -25,9 +26,8 @@ class Task {
       container.removeChild(this._element);
       this._element = null;
     }
-
-    this._element = createElement(this.template);
-    container.appendChild(this._element);
+    debugger;
+    container.insertAdjacentHTML(`beforeend`, this.template);
   }
 
   get template() {
@@ -288,3 +288,5 @@ class Task {
           </article>`;
   }
 }
+
+export {Task};
