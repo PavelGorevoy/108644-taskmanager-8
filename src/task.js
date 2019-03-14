@@ -2,7 +2,6 @@ import {createElement} from './create-element.js';
 
 class Task {
   constructor(data) {
-        debugger;
     this._title = data.title;
     this._color = data.color;
     this._dueData = data.dueDate;
@@ -26,7 +25,6 @@ class Task {
       container.removeChild(this._element);
       this._element = null;
     }
-    debugger;
     container.insertAdjacentHTML(`beforeend`, this.template);
   }
 
