@@ -20,12 +20,23 @@ class Task {
     return Object.values(this._repeatingDays).some((it) => it === true);
   }
 
+  _onEditButtonClick() {
+
+  }
+
+  bind() {
+    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
+  }
+
   render(container) {
     if (this._element) {
       container.removeChild(this._element);
       this._element = null;
     }
-    container.insertAdjacentHTML(`beforeend`, this.template);
+    this._element = createElement(this.template);
+    container.appendChild(this._element);
+
+    this.bind();
   }
 
   get template() {
@@ -283,7 +294,7 @@ class Task {
                 </div>
               </div>
             </form>
-          </article>`;
+          </article>`.trim();
   }
 }
 
