@@ -1,5 +1,5 @@
 import {createElement} from './create-element.js';
-import {transfer} from './transfer.js';
+import {transfer} from './switch-task.js';
 
 class Task {
   constructor(data) {

@@ -1,5 +1,5 @@
 import {createElement} from './create-element.js';
-import {transfer} from './transfer.js';
+import {transfer} from './switch-task.js';
 
 class TaskEdit {
   constructor(data) {
@@ -21,7 +21,6 @@ class TaskEdit {
   }
 
   _onSubmitButtonClick(evt) {
-    debugger;
     evt.preventDefault();
     transfer(this);
     if (typeof this._onSubmit === `function`) {
