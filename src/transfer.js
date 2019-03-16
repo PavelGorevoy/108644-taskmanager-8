@@ -16,7 +16,6 @@ const exchange = (oldTask, newTask) => {
 const taskToEdit = (oldTask) => {
   let newTask = new TaskEdit(task());
   exchange(oldTask, newTask);
-
   oldTask.onEdit = () => {
     newTask.render(BOARD_TASKS);
     BOARD_TASKS.replaceChild(newTask._element, oldTask._element);
@@ -27,6 +26,11 @@ const taskToEdit = (oldTask) => {
 const editToTask = (oldTask) => {
   let newTask = new Task(task());
   exchange(oldTask, newTask);
+  oldTask.onSubmit = () => {
+    newTask.render(BOARD_TASKS);
+    BOARD_TASKS.replaceChild(newTask._element, oldTask._element);
+    oldTask.unrender();
+  };
 };
 
 const transfer = (oldTask) => oldTask instanceof Task ? taskToEdit(oldTask) : editToTask(oldTask);

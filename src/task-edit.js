@@ -1,4 +1,5 @@
 import {createElement} from './create-element.js';
+import {transfer} from './transfer.js';
 
 class TaskEdit {
   constructor(data) {
@@ -19,13 +20,21 @@ class TaskEdit {
     return Object.values(this._repeatingDays).some((it) => it === true);
   }
 
-  _onEditButtonClick() {
-    this._state.isEdit = !this._state.isEdit;
-    this.update();
+  _onSubmitButtonClick(evt) {
+    debugger;
+    evt.preventDefault();
+    transfer(this);
+    if (typeof this._onSubmit === `function`) {
+      this._onSubmit();
+    }
   }
 
   bind() {
-    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick.bind(this));
+    this._element.querySelector(`.card__form`).addEventListener(`submit`, this._onSubmitButtonClick.bind(this));
+  }
+
+  undind() {
+    this._element.querySelector(`.card__form`).removeEventListener(`submit`, this._onSubmitButtonClick.bind(this));
   }
 
   render(container) {
@@ -37,11 +46,10 @@ class TaskEdit {
 
   unrender() {
     this._element = null;
-    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
-  update() {
-
+  set onSubmit(fn) {
+    this._onSubmit = fn;
   }
 
   get template() {
