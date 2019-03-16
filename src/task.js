@@ -1,5 +1,6 @@
 import {createElement} from './create-element.js';
 import {transfer} from './transfer.js';
+import {edit} from './task-dynamic.js';
 
 class Task {
   constructor(data) {
@@ -11,6 +12,7 @@ class Task {
     this._repeatingDays = data.repeatingDays;
 
     this._element = null;
+    this._onEdit = null;
     this._state = {
       isFavorite: data.isFavorite
     };
@@ -22,6 +24,7 @@ class Task {
 
   _onEditButtonClick() {
     this._state.isEdit = !this._state.isEdit;
+    this.onEdit(edit);
     this.update();
   }
 
@@ -36,9 +39,7 @@ class Task {
     }
     this._element = createElement(this.template);
     container.appendChild(this._element);
-
     this.bind();
-
     return this._element;
   }
 
@@ -48,8 +49,11 @@ class Task {
   }
 
   update() {
-    debugger;
-    console.log(transfer(this));
+    transfer(this);
+  }
+
+  set onEdit(fn) {
+    this._onEdit = fn;
   }
 
   get template() {

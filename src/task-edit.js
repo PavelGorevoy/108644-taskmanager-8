@@ -1,4 +1,6 @@
 import {createElement} from './create-element.js';
+import {transfer} from './transfer.js';
+import {onSubmit} from './task-dynamic.js';
 
 class TaskEdit {
   constructor(data) {

@@ -16,6 +16,7 @@ const FILTER_TITLES = [
   `archive`
 ];
 const FILTER_CHECKED = FILTER_TITLES[0];
+let cardTask = [];
 
 const checkedFilter = function (fragment, filter) {
   fragment.getElementById(`filter__${filter}`).checked = true;
@@ -55,7 +56,6 @@ const renderCards = function () {
   let template = document.createElement(`template`);
   let fragment = document.createDocumentFragment();
   let countCards = MIN_CARD_COUNT + randomCount(4);
-  let cardTask = [];
   for (let i = 0; i < countCards; i++) {
     cardTask[i] = new Task(task());
     cardTask[i].render(template);
@@ -68,3 +68,5 @@ const renderCards = function () {
 
 renderMainFilters(FILTER_TITLES);
 renderCards();
+
+export {BOARD_TASKS, cardTask};

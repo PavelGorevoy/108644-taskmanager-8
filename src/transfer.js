@@ -4,6 +4,7 @@ import {TaskEdit} from './task-edit.js';
 
 const transfer = (oldTask) => {
   let newTask = oldTask instanceof Task ? new TaskEdit(task()) : new Task(task());
+
   newTask._title = oldTask._title;
   newTask._color = oldTask._color;
   newTask._dueDate = oldTask._dueDate;
