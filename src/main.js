@@ -69,4 +69,4 @@ const renderCards = function () {
 renderMainFilters(FILTER_TITLES);
 renderCards();
 
-export {BOARD_TASKS, cardTask};
+export {BOARD_TASKS};

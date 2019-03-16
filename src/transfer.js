@@ -1,10 +1,9 @@
 import {task} from './data.js';
 import {Task} from './task.js';
 import {TaskEdit} from './task-edit.js';
+import {BOARD_TASKS} from './main.js';
 
-const transfer = (oldTask) => {
-  let newTask = oldTask instanceof Task ? new TaskEdit(task()) : new Task(task());
-
+const exchange = (oldTask, newTask) => {
   newTask._title = oldTask._title;
   newTask._color = oldTask._color;
   newTask._dueDate = oldTask._dueDate;
@@ -12,7 +11,24 @@ const transfer = (oldTask) => {
   newTask._picture = oldTask._picture;
   newTask._repeatingDays = oldTask._repeatingDays;
   newTask._state.isFavorite = oldTask._state.isFavorite;
-  return newTask;
 };
+
+const taskToEdit = (oldTask) => {
+  let newTask = new TaskEdit(task());
+  exchange(oldTask, newTask);
+
+  oldTask.onEdit = () => {
+    newTask.render(BOARD_TASKS);
+    BOARD_TASKS.replaceChild(newTask._element, oldTask._element);
+    oldTask.unrender();
+  };
+};
+
+const editToTask = (oldTask) => {
+  let newTask = new Task(task());
+  exchange(oldTask, newTask);
+};
+
+const transfer = (oldTask) => oldTask instanceof Task ? taskToEdit(oldTask) : editToTask(oldTask);
 
 export {transfer};

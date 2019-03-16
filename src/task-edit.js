@@ -1,12 +1,10 @@
 import {createElement} from './create-element.js';
-import {transfer} from './transfer.js';
-import {onSubmit} from './task-dynamic.js';
 
 class TaskEdit {
   constructor(data) {
     this._title = data.title;
     this._color = data.color;
-    this._dueData = data.dueDate;
+    this._dueDate = data.dueDate;
     this._tags = data.tags;
     this._picture = data.picture;
     this._repeatingDays = data.repeatingDays;
@@ -31,15 +29,9 @@ class TaskEdit {
   }
 
   render(container) {
-    if (this._element) {
-      container.removeChild(this._element);
-      this._element = null;
-    }
     this._element = createElement(this.template);
     container.appendChild(this._element);
-
     this.bind();
-
     return this._element;
   }
 
