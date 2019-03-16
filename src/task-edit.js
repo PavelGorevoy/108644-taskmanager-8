@@ -1,6 +1,6 @@
 import {createElement} from './create-element.js';
 
-class Task {
+class TaskEdit {
   constructor(data) {
     this._title = data.title;
     this._color = data.color;
@@ -44,7 +44,7 @@ class Task {
 
   unrender() {
     this._element = null;
-    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick);
+    this._element.querySelector(`.card__btn--edit`).removeEventListener(`click`, this._onEditButtonClick.bind(this));
   }
 
   update() {
@@ -53,7 +53,7 @@ class Task {
 
   get template() {
     return `
-  <article class="card card--${this._color} ${this._isRepeated() ? `card--repeat` : ``} ${this._dueDate < Date.now() ? `card--deadline` : ``}">
+  <article class="card card--${this._color} ${this._isRepeated() ? `card--repeat` : ``} ${this._dueDate < Date.now() ? `card--deadline` : ``} card--edit">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -310,4 +310,4 @@ class Task {
   }
 }
 
-export {Task};
+export {TaskEdit};
