@@ -2,7 +2,6 @@ import makeFilter from './make-filter.js';
 import {randomCount} from './util.js';
 import {task} from './data.js';
 import {Task} from './task.js';
-import {TaskEdit} from './task-edit.js';
 
 const MAIN_FILTER = document.querySelector(`.main__filter`);
 const BOARD_TASKS = document.querySelector(`.board__tasks`);

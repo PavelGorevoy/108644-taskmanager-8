@@ -11,7 +11,6 @@ class TaskEdit {
 
     this._element = null;
     this._state = {
-      isEdit: false,
       isFavorite: data.isFavorite
     };
   }

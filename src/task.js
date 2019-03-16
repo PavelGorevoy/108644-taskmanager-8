@@ -1,4 +1,5 @@
 import {createElement} from './create-element.js';
+import {transfer} from './transfer.js';
 
 class Task {
   constructor(data) {
@@ -11,7 +12,6 @@ class Task {
 
     this._element = null;
     this._state = {
-      isEdit: false,
       isFavorite: data.isFavorite
     };
   }
@@ -48,7 +48,8 @@ class Task {
   }
 
   update() {
-
+    debugger;
+    console.log(transfer(this));
   }
 
   get template() {
