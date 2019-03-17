@@ -12,6 +12,7 @@ class Task {
 
     this._element = null;
     this._onEdit = null;
+    this._onEditButtonClick = this._onEditButtonClick.bind(this);
     this._state = {
       isFavorite: data.isFavorite
     };

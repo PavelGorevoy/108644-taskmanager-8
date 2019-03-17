@@ -11,6 +11,7 @@ class TaskEdit {
     this._repeatingDays = data.repeatingDays;
 
     this._element = null;
+    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
     this._state = {
       isFavorite: data.isFavorite
     };
@@ -44,6 +45,7 @@ class TaskEdit {
   }
 
   unrender() {
+    this.unbind();
     this._element = null;
   }
 
