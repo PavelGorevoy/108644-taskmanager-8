@@ -30,11 +30,11 @@ class TaskEdit {
   }
 
   bind() {
-    this._element.querySelector(`.card__form`).addEventListener(`submit`, this._onSubmitButtonClick.bind(this));
+    this._element.querySelector(`.card__form`).addEventListener(`submit`, this._onSubmitButtonClick);
   }
 
-  undind() {
-    this._element.querySelector(`.card__form`).removeEventListener(`submit`, this._onSubmitButtonClick.bind(this));
+  unbind() {
+    this._element.querySelector(`.card__form`).removeEventListener(`submit`, this._onSubmitButtonClick);
   }
 
   render(container) {
