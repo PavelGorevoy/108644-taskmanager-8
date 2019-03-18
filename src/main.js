@@ -1,11 +1,11 @@
 import makeFilter from './make-filter.js';
-import makeTask from './make-task.js';
 import {randomCount} from './util.js';
-import {getTask} from './data.js';
+import {task} from './data.js';
+import {Task} from './task.js';
 
 const MAIN_FILTER = document.querySelector(`.main__filter`);
 const BOARD_TASKS = document.querySelector(`.board__tasks`);
-const MIN_CARD_COUNT = 5;
+const MIN_CARD_COUNT = 8;
 const FILTER_TITLES = [
   `all`,
   `overdue`,
@@ -16,6 +16,7 @@ const FILTER_TITLES = [
   `archive`
 ];
 const FILTER_CHECKED = FILTER_TITLES[0];
+let cardTask = [];
 
 const checkedFilter = function (fragment, filter) {
   fragment.getElementById(`filter__${filter}`).checked = true;
@@ -25,7 +26,7 @@ const resetCards = function () {
   while (BOARD_TASKS.firstChild) {
     BOARD_TASKS.removeChild(BOARD_TASKS.firstChild);
   }
-  renderCards(getTask);
+  renderCards(task);
 };
 
 const onFilterClick = () => resetCards();
@@ -54,9 +55,10 @@ const renderMainFilters = function (filters) {
 const renderCards = function () {
   let template = document.createElement(`template`);
   let fragment = document.createDocumentFragment();
-  let countCards = MIN_CARD_COUNT + randomCount(7);
+  let countCards = MIN_CARD_COUNT + randomCount(4);
   for (let i = 0; i < countCards; i++) {
-    template.insertAdjacentHTML(`beforeend`, makeTask(getTask()));
+    cardTask[i] = new Task(task());
+    cardTask[i].render(template);
     for (let j = 0; j < template.children.length;) {
       fragment.appendChild(template.children[j]);
     }
@@ -66,3 +68,5 @@ const renderCards = function () {
 
 renderMainFilters(FILTER_TITLES);
 renderCards();
+
+export {BOARD_TASKS};
