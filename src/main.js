@@ -5,7 +5,7 @@
   const MAIN_FILTER = document.querySelector(`.main__filter`);
   const BOARD_TASKS = document.querySelector(`.board__tasks`);
   const MAX_FILTER_COUNT = 99;
-  const MIN_CARD_COUNT = 5;
+  const MIN_CARD_COUNT = 10;
   const FILTER_TITLES = [
     `all`,
     `overdue`,
